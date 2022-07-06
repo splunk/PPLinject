@@ -69,12 +69,6 @@ VOID PrintArguments()
 VOID PrintUsage()
 {
 	wprintf(
-		L" _____ _____ __      _               \n"
-		"|  _  |  _  |  |   _| |_ _ _____ ___ \n"
-		"|   __|   __|  |__| . | | |     | . |  version %ws\n"
-		"|__|  |__|  |_____|___|___|_|_|_|  _|  by %ws\n"
-		"                                |_|  \n"
-		"\n"
 		"Description:\n"
 		"  Inject an unsigned DLL into a Protected Process Light (PPL) with a *userland* exploit\n"
 		"\n",

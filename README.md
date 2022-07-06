@@ -13,11 +13,6 @@ Simply run the executable without any argument and you will get a detailed help/
 
 ```console
 c:\Temp>PPLinject64.exe
- _____ _____ __      _
-|  _  |  _  |  |   _| |_ _ _____ ___
-|   __|   __|  |__| . | | |     | . |  version 0.4
-|__|  |__|  |_____|___|___|_|_|_|  _|  by @itm4n
-                                |_|
 
 Description:
   Inject an unsigned DLL into a Protected Process Light (PPL) with a *userland* exploit
