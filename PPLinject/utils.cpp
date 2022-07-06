@@ -69,11 +69,11 @@ VOID PrintArguments()
 VOID PrintUsage()
 {
 	wprintf(
+		L"PPLinject v%ws\n"
 		"Description:\n"
 		"  Inject an unsigned DLL into a Protected Process Light (PPL) with a *userland* exploit\n"
 		"\n",
-		VERSION,
-		AUTHOR
+		VERSION
 	);
 
 	wprintf(
@@ -99,7 +99,7 @@ VOID PrintUsage()
 
 	wprintf(
 		L"Examples:\n"
-		"  PPLinject.exe -d 684 C:\Users\Rebecca\AppData\Local\Temp\capemon_x64.dll\n"
+		"  PPLinject.exe -d 684 C:\\Users\\Rebecca\\AppData\\Local\\Temp\\capemon_x64.dll\n"
 	);
 }
 
