@@ -5,10 +5,17 @@ BOOL ParseArguments(int argc, wchar_t* argv[])
 	BOOL bReturnValue = TRUE;
 	BOOL bHelp = FALSE;
 
-	if (argc < 3)
+	if (argc < 4)
 	{
 		PrintUsage();
 		return FALSE;
+	}
+
+	if (argc == 5)
+	{
+		// Read log named pipe
+		--argc;
+		g_pwszLogPipe = argv[argc];
 	}
 
 	// Read Dll file path
@@ -69,7 +76,7 @@ VOID PrintArguments()
 VOID PrintUsage()
 {
 	wprintf(
-		L"PPLinject v%ws\n"
+		L"PPLinject v%ws - https://github.com/twinwave-security/PPLinject\n\n"
 		"Description:\n"
 		"  Inject an unsigned DLL into a Protected Process Light (PPL) with a *userland* exploit\n"
 		"\n",
@@ -106,7 +113,15 @@ VOID PrintUsage()
 VOID PrintLastError(LPCWSTR pwszFunctionName)
 {
 	DWORD dwLastError = GetLastError();
-	wprintf(L"[-] %ws failed with error code %d - %ws\n", pwszFunctionName, dwLastError, _com_error(HRESULT_FROM_WIN32(dwLastError)).ErrorMessage());
+	if (g_pwszLogPipe)
+	{
+		DWORD nBytesRead = 0;
+		char szPipeOutput[MAX_PATH] = {0};
+		_snprintf_s(szPipeOutput, MAX_PATH, _TRUNCATE, "DEBUG:[-] %ws failed with error code %d - %ws\n", pwszFunctionName, dwLastError, _com_error(HRESULT_FROM_WIN32(dwLastError)).ErrorMessage());
+		CallNamedPipe(g_pwszLogPipe, szPipeOutput, (DWORD)strlen(szPipeOutput), szPipeOutput, (DWORD)strlen(szPipeOutput), (unsigned long *)&nBytesRead, NMPWAIT_WAIT_FOREVER);
+	}
+	else
+		wprintf(L"[-] %ws failed with error code %d - %ws\n", pwszFunctionName, dwLastError, _com_error(HRESULT_FROM_WIN32(dwLastError)).ErrorMessage());
 }
 
 VOID PrintVerbose(LPCWSTR pwszFormat, ...)
@@ -138,7 +153,15 @@ VOID PrintVerbose(LPCWSTR pwszFormat, ...)
 			{
 				StringCbVPrintf(&pwszVerboseString[st_Offset / sizeof(WCHAR)], dwVerboseStringLen - st_Offset, pwszFormat, va);
 
-				wprintf(L"%ws", pwszVerboseString);
+				if (g_pwszLogPipe)
+				{
+					DWORD nBytesRead = 0;
+					char szPipeOutput[MAX_PATH] = {0};
+					_snprintf_s(szPipeOutput, MAX_PATH, _TRUNCATE, "DEBUG:%ws", pwszVerboseString);
+					CallNamedPipe(g_pwszLogPipe, szPipeOutput, (DWORD)strlen(szPipeOutput), szPipeOutput, (DWORD)strlen(szPipeOutput), (unsigned long *)&nBytesRead, NMPWAIT_WAIT_FOREVER);
+				}
+				else
+					wprintf(L"%ws", pwszVerboseString);
 			}
 
 			LocalFree(pwszVerboseString);
@@ -174,7 +197,15 @@ VOID PrintDebug(LPCWSTR pwszFormat, ...)
 			{
 				StringCbVPrintf(&pwszDebugString[st_Offset / sizeof(WCHAR)], dwDebugStringLen - st_Offset, pwszFormat, va);
 
-				wprintf(L"%ws", pwszDebugString);
+				if (g_pwszLogPipe)
+				{
+					DWORD nBytesRead = 0;
+					char szPipeOutput[MAX_PATH] = {0};
+					_snprintf_s(szPipeOutput, MAX_PATH, _TRUNCATE, "DEBUG:%ws", pwszDebugString);
+					CallNamedPipe(g_pwszLogPipe, szPipeOutput, (DWORD)strlen(szPipeOutput), szPipeOutput, (DWORD)strlen(szPipeOutput), (unsigned long *)&nBytesRead, NMPWAIT_WAIT_FOREVER);
+				}
+				else
+					wprintf(L"%ws", pwszDebugString);
 			}
 
 			LocalFree(pwszDebugString);

@@ -14,7 +14,7 @@
 #pragma comment(lib, "Pathcch.lib")
 
 #define AUTHOR L"@itm4n"
-#define VERSION L"0.4"
+#define VERSION L"0.1"
 
 extern BOOL g_bVerbose;
 extern BOOL g_bDebug;
@@ -22,6 +22,7 @@ extern BOOL g_bForce;
 extern DWORD g_dwProcessId;
 extern LPWSTR g_pwszDllPath;
 extern LPWSTR g_pwszProcessName;
+extern LPWSTR g_pwszLogPipe;
 
 BOOL ParseArguments(int argc, wchar_t* argv[]);
 VOID PrintArguments();

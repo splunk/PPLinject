@@ -8,6 +8,7 @@ BOOL g_bForce = FALSE;
 DWORD g_dwProcessId = 0;
 LPWSTR g_pwszDllPath = NULL;
 LPWSTR g_pwszProcessName = NULL;
+LPWSTR g_pwszLogPipe = NULL;
 
 int wmain(int argc, wchar_t* argv[])
 {
