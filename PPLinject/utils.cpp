@@ -5,7 +5,7 @@ BOOL ParseArguments(int argc, wchar_t* argv[])
 	BOOL bReturnValue = TRUE;
 	BOOL bHelp = FALSE;
 
-	if (argc < 4)
+	if (argc < 3)
 	{
 		PrintUsage();
 		return FALSE;
@@ -22,15 +22,9 @@ BOOL ParseArguments(int argc, wchar_t* argv[])
 	--argc;
 	g_pwszDllPath = argv[argc];
 
-	// Read target process name or pid
+	// Read target process pid
 	--argc;
-	g_pwszProcessName = argv[argc];
-
-	// Try to interpret target process argument as a number (PID rather than name)
 	g_dwProcessId = wcstoul(argv[argc], nullptr, 10);
-
-	if (g_dwProcessId != 0)
-		g_pwszProcessName = NULL;
 
 	// Parse options
 	while ((argc > 1) && (argv[1][0] == '-'))
@@ -70,7 +64,7 @@ BOOL ParseArguments(int argc, wchar_t* argv[])
 
 VOID PrintArguments()
 {
-	PrintVerbose(L"Verbose=%d | Debug=%d | Force=%d | Proc='%ws' | PID=%d | File='%ws'", g_bVerbose, g_bDebug, g_bForce, g_pwszProcessName, g_dwProcessId, g_pwszDllPath);
+	PrintVerbose(L"Verbose=%d | Debug=%d | Force=%d | PID=%d | File='%ws'", g_bVerbose, g_bDebug, g_bForce, g_dwProcessId, g_pwszDllPath);
 }
 
 VOID PrintUsage()
