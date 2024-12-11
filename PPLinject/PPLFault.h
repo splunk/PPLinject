@@ -1,0 +1,1 @@
+int PPLFault(_In_ DWORD dwProcessId, _In_ LPWSTR pwszDllPath);

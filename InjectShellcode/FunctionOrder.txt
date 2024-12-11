@@ -1,0 +1,12 @@
+Shellcode
+LoadLibraryThreadFunc
+CurrentTeb
+WhereAmI
+_memset
+_wcslen
+_RtlInitUnicodeString
+memeq
+FindMyBase
+GetParams
+EndShellcode
+main

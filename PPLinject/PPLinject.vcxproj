@@ -23,7 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{fce81bda-acac-4892-969e-0414e765593b}</ProjectGuid>
     <RootNamespace>PPLinject</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -164,12 +164,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="exploit.cpp" />
+    <ClCompile Include="Payload.cpp" />
+    <ClCompile Include="PPLFault.cpp" />
     <ClCompile Include="PPLinject.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="exploit.h" />
     <ClInclude Include="ntdll.h" />
+    <ClInclude Include="Payload.h" />
+    <ClInclude Include="PPLFault.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
